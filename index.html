@@ -93,6 +93,16 @@
 }
 
 
+
+/* Isolated demo print fix: print the visible label for both button and Ctrl+P. */
+@media print {
+ @page { size:40mm 20mm; margin:1mm; }
+ html,body { margin:0!important; padding:0!important; width:38mm!important; height:18mm!important; overflow:hidden!important; background:white!important; }
+ body * { visibility:hidden!important; }
+ #label, #label * { visibility:visible!important; }
+ #label { display:block!important; position:fixed!important; top:0!important; left:0!important; margin:0!important; padding:0!important; width:38mm!important; height:18mm!important; overflow:hidden!important; break-inside:avoid!important; }
+ #copy-center-print-root { display:none!important; }
+}
 </style></head><body><div class="panel"><p style="border:1px solid #d1dbe6;background:#f1f5fa;padding:14px;font-weight:bold">نسخة عرض تجريبية مستقلة فقط، وليست نظام الكوبي سنتر الحقيقي. كل البيانات وهمية؛ لا يمكن إنشاء طلب حقيقي أو الدفع.</p><div id="scan-info" style="display:none;border:1px solid #d1dbe6;padding:12px">تم فتح رمز تجريبي: 0123456789. الإجمالي التجريبي: 12.30 ريال. لا يوجد طلب حقيقي.</div><h2>Copy Center — Printer Test / اختبار طباعة الكوبي سنتر</h2>
 <p>هذه تجربة طباعة مستقلة. لا تنشئ أي طلب أو عملية دفع، ولا تغيّر الموقع المنشور.</p>
 <div class="preview"><div class="label-sheet" id="label" data-order-label="CUSTOMER"><div class="order-label-content" data-ticket-code="0123456789" data-ticket-total="12.30"><div class="order-label-text"><p class="order-label-kind">اختبار ملصق العميل</p><p class="order-label-number" dir="ltr">CP-TEST-0001</p><p class="order-label-code" dir="ltr">0123456789</p><p class="order-label-total" data-order-total><span>الإجمالي</span><br><bdi dir="ltr">12.30 SAR</bdi></p></div><div data-order-qr style="width:18mm;height:18mm;line-height:0;background:#fff">
@@ -100,7 +110,7 @@
 
 
 </div></div></div></div>
-<button class="btn" type="button" onclick="window.testPrint(&quot;label&quot;).catch(e=>alert(e.message))">طباعة ملصق تجريبي</button>
+<button class="btn" type="button" onclick="window.print()">طباعة ملصق تجريبي</button>
 <p class="hint">مقاس الملصق 40 × 20 ملم. الرمز للاختبار فقط ولا يفتح طلباً حقيقياً. افتح معاينة الطباعة واختر الطابعة المناسبة.</p>
 </div><script>var exports={};
 "use strict";

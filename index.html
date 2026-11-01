@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>Copy Center - Print Test</title>
+<style>body{font-family:Arial,sans-serif;background:#f6f8fb;color:#122;margin:30px}.panel{max-width:740px;margin:0 auto;background:#fff;border:1px solid #dae2e8;border-radius:12px;padding:25px}.preview{background:#eef3f6;padding:16px;border:1px solid #d7dfe6;margin:20px 0}.label-sheet{background:#fff;display:inline-block;width:38mm;height:18mm;padding:0;overflow:hidden}.btn{font-size:18px;background:#086e67;color:white;border:0;border-radius:8px;padding:15px 25px;cursor:pointer}.hint{font-size:13px;color:#52616d}
+/* 38 x 18 mm is the usable area of the owner-confirmed 40 x 20 mm stock.
+ * Keep text beside the QR, so their heights are never added together. */
+.order-label-content {
+  box-sizing: border-box;
+  width: 38mm;
+  height: 18mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1mm;
+  background: #fff;
+  color: #000;
+  direction: rtl;
+  font-family: Arial, sans-serif;
+}
+
+.order-label-text {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+
+.order-label-content p { margin: 0; color: #000; }
+.order-label-kind { font-size: 6pt; line-height: 1.2; }
+.order-label-number { font-size: 5.5pt; line-height: 1.2; font-weight: bold; white-space: nowrap; }
+.order-label-code { font: bold 7pt/1.3 monospace; white-space: nowrap; }
+.order-label-total { font-size: 6pt; line-height: 1.2; font-weight: bold; white-space: nowrap; }
+.order-label-content [data-order-qr] { flex-shrink: 0; }
+
+@media print {
+  /* Owner-confirmed 40x20mm stock. Keep the single QR at 18mm, including
+   * its quiet zone; compact the adjacent text instead of shrinking the code. */
+  @page {
+    size: 40mm 20mm;
+    margin: 1mm;
+  }
+
+  body > *:not(#copy-center-print-root) {
+    display: none !important;
+  }
+
+  #copy-center-print-root {
+    display: block !important;
+    direction: rtl;
+    width: 38mm;
+    color: #000;
+    background: #fff;
+    font-family: Arial, sans-serif;
+  }
+
+  #copy-center-print-root button,
+  #copy-center-print-root [data-print-control] {
+    display: none !important;
+  }
+
+  /* A code is only as readable as its contrast. A thermal printer has no
+   * greys and a scanner reads reflectance, so force pure black on pure white
+   * and stop the browser economising on the bars. */
+  #copy-center-print-root .label-sheet {
+    width: 38mm;
+    height: 18mm;
+    box-sizing: border-box;
+    margin: 0 !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    padding: 0;
+    border: 0;
+    background: #fff !important;
+    color: #000 !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  #copy-center-print-root .label-sheet > * {
+    margin: 0 !important;
+  }
+
+  #copy-center-print-root svg {
+    background: #fff !important;
+  }
+
+  /* Never let a print rule rescale the code: its millimetre size is the whole
+   * reason it can be read. Rescaling by CSS is what broke the old label --
+   * `h-14 w-full` silently overrode the width the generator had written,
+   * leaving a 0.175mm bar that no scanner could read. */
+  #copy-center-print-root .label-sheet svg {
+    max-width: none !important;
+    max-height: none !important;
+    min-width: 0 !important;
+  }
+}
+
+
+</style></head><body><div class="panel"><p style="border:1px solid #d1dbe6;background:#f1f5fa;padding:14px;font-weight:bold">نسخة عرض تجريبية مستقلة فقط، وليست نظام الكوبي سنتر الحقيقي. كل البيانات وهمية؛ لا يمكن إنشاء طلب حقيقي أو الدفع.</p><div id="scan-info" style="display:none;border:1px solid #d1dbe6;padding:12px">تم فتح رمز تجريبي: 0123456789. الإجمالي التجريبي: 12.30 ريال. لا يوجد طلب حقيقي.</div><h2>Copy Center — Printer Test / اختبار طباعة الكوبي سنتر</h2>
+<p>هذه تجربة طباعة مستقلة. لا تنشئ أي طلب أو عملية دفع، ولا تغيّر الموقع المنشور.</p>
+<div class="preview"><div class="label-sheet" id="label" data-order-label="CUSTOMER"><div class="order-label-content" data-ticket-code="0123456789" data-ticket-total="12.30"><div class="order-label-text"><p class="order-label-kind">اختبار ملصق العميل</p><p class="order-label-number" dir="ltr">CP-TEST-0001</p><p class="order-label-code" dir="ltr">0123456789</p><p class="order-label-total" data-order-total><span>الإجمالي</span><br><bdi dir="ltr">12.30 SAR</bdi></p></div><div data-order-qr style="width:18mm;height:18mm;line-height:0;background:#fff">
+<svg width="18mm" height="18mm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h45v45H0z"/><path stroke="#000000" d="M4 4.5h7m2 0h4m2 0h2m1 0h1m2 0h1m1 0h2m1 0h2m2 0h7M4 5.5h1m5 0h1m1 0h1m4 0h1m2 0h1m2 0h5m3 0h2m1 0h1m5 0h1M4 6.5h1m1 0h3m1 0h1m3 0h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h1m1 0h1m3 0h1m1 0h3m1 0h1M4 7.5h1m1 0h3m1 0h1m2 0h1m1 0h1m3 0h2m2 0h1m2 0h2m2 0h3m1 0h1m1 0h3m1 0h1M4 8.5h1m1 0h3m1 0h1m1 0h1m3 0h1m5 0h2m1 0h1m1 0h5m2 0h1m1 0h3m1 0h1M4 9.5h1m5 0h1m4 0h2m1 0h2m1 0h1m1 0h3m1 0h6m1 0h1m5 0h1M4 10.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M13 11.5h3m1 0h1m2 0h2m1 0h5m1 0h4M4 12.5h1m1 0h1m1 0h1m1 0h1m5 0h2m1 0h3m2 0h2m1 0h3m2 0h1m3 0h1m2 0h1M4 13.5h4m3 0h4m3 0h3m2 0h1m1 0h2m2 0h1m2 0h1m1 0h1m5 0h1M5 14.5h1m1 0h1m1 0h4m3 0h1m2 0h3m1 0h2m2 0h2m1 0h1m1 0h2m2 0h5M4 15.5h3m6 0h2m2 0h2m1 0h2m1 0h1m1 0h3m1 0h4m1 0h2m3 0h1M4 16.5h1m1 0h2m1 0h2m1 0h1m5 0h2m1 0h1m1 0h1m1 0h1m2 0h2m2 0h3m4 0h2M5 17.5h3m1 0h1m1 0h3m1 0h4m1 0h2m2 0h1m3 0h1m3 0h3m4 0h2M5 18.5h1m1 0h1m2 0h2m1 0h3m1 0h2m1 0h3m1 0h1m1 0h1m1 0h2m4 0h2m2 0h3M4 19.5h1m2 0h1m1 0h1m1 0h3m1 0h1m1 0h3m3 0h1m2 0h9m1 0h1m3 0h1M4 20.5h5m1 0h2m1 0h3m1 0h1m3 0h5m2 0h8m1 0h1m2 0h1M5 21.5h1m3 0h1m1 0h2m1 0h1m3 0h2m2 0h1m1 0h1m1 0h3m3 0h3m3 0h1m1 0h1M4 22.5h1m5 0h1m1 0h1m1 0h1m2 0h1m4 0h2m2 0h3m4 0h1m1 0h2m2 0h2M5 23.5h1m8 0h1m3 0h2m1 0h3m1 0h3m1 0h1m1 0h2m3 0h1m2 0h1M4 24.5h4m2 0h1m10 0h1m1 0h7m1 0h4m2 0h1M4 25.5h2m2 0h1m2 0h2m2 0h1m1 0h1m2 0h2m2 0h1m3 0h1m3 0h4m1 0h1m1 0h2M4 26.5h1m4 0h2m2 0h2m2 0h1m3 0h2m1 0h3m1 0h1m6 0h1m2 0h3M5 27.5h1m1 0h3m1 0h1m1 0h5m2 0h11m1 0h1m3 0h1M5 28.5h2m3 0h1m2 0h3m1 0h4m3 0h1m1 0h2m2 0h5m2 0h1m1 0h1M7 29.5h2m4 0h1m1 0h2m1 0h3m1 0h1m3 0h2m2 0h1m2 0h3m3 0h2M4 30.5h1m1 0h1m1 0h3m1 0h2m1 0h1m1 0h1m1 0h3m3 0h1m1 0h4m1 0h1m1 0h1m3 0h3M5 31.5h3m4 0h3m1 0h2m2 0h3m2 0h1m3 0h4m2 0h1M4 32.5h1m1 0h3m1 0h2m1 0h1m1 0h1m3 0h4m2 0h1m1 0h3m2 0h5m2 0h1M12 33.5h2m6 0h2m2 0h1m3 0h2m1 0h2m3 0h2m1 0h2M4 34.5h7m2 0h1m1 0h2m4 0h2m2 0h2m3 0h3m1 0h1m1 0h2m2 0h1M4 35.5h1m5 0h1m3 0h2m1 0h1m3 0h3m1 0h3m1 0h1m2 0h1m3 0h2M4 36.5h1m1 0h3m1 0h1m1 0h2m2 0h3m1 0h1m2 0h3m2 0h3m1 0h6M4 37.5h1m1 0h3m1 0h1m2 0h1m2 0h1m1 0h2m5 0h4m2 0h2m2 0h2m3 0h1M4 38.5h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h1m1 0h2m3 0h1m1 0h2m1 0h1m1 0h2m2 0h3m1 0h1M4 39.5h1m5 0h1m3 0h2m1 0h1m1 0h1m1 0h2m2 0h3m1 0h1m2 0h1m1 0h3m2 0h1M4 40.5h7m1 0h2m2 0h1m1 0h4m1 0h3m2 0h2m1 0h2m4 0h1m1 0h2"/></svg>
+
+
+</div></div></div></div>
+<button class="btn" type="button" onclick="window.testPrint(&quot;label&quot;).catch(e=>alert(e.message))">طباعة ملصق تجريبي</button>
+<p class="hint">مقاس الملصق 40 × 20 ملم. الرمز للاختبار فقط ولا يفتح طلباً حقيقياً. افتح معاينة الطباعة واختر الطابعة المناسبة.</p>
+</div><script>var exports={};
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.printLabelElement = printLabelElement;
+/**
+ * Print only one label. The source stays in the live React tree; a clone is
+ * placed in a dedicated print root so navigation, sidebars and buttons never
+ * leak onto the thermal label.
+ */
+let preparingPrint = false;
+async function printLabelElement(elementId) {
+    const source = document.getElementById(elementId);
+    if (!source)
+        throw new Error('تعذر العثور على الملصق للطباعة');
+    if (preparingPrint)
+        throw new Error('يجري تجهيز ملصق للطباعة، انتظر قليلًا');
+    preparingPrint = true;
+    try {
+        // QRCode.toString resolves asynchronously. Never freeze its empty
+        // placeholder into the print clone, even if print is clicked immediately.
+        await new Promise((resolve, reject) => {
+            const ready = () => source.isConnected && !!source.querySelector('[data-order-qr] svg path');
+            if (ready()) {
+                resolve();
+                return;
+            }
+            const observer = new MutationObserver(() => {
+                if (ready()) {
+                    observer.disconnect();
+                    clearTimeout(timer);
+                    resolve();
+                }
+            });
+            const timer = window.setTimeout(() => {
+                observer.disconnect();
+                reject(new Error('لم يكتمل رمز الطلب؛ لم تُفتح الطباعة. أعد المحاولة بعد ظهور الرمز.'));
+            }, 5000);
+            observer.observe(source, { childList: true, subtree: true });
+        });
+        // Order tickets must include their validated code and visible total.
+        // Other label kinds retain their existing contract.
+        if (source.hasAttribute('data-order-label')) {
+            const ticket = source.querySelector('[data-ticket-code][data-ticket-total]');
+            const total = source.querySelector('[data-order-total]');
+            const visibleAmount = total?.querySelector('bdi')?.textContent?.trim();
+            if (!ticket || visibleAmount !== `${ticket.dataset.ticketTotal} SAR`) {
+                throw new Error('تعذر التحقق من إجمالي الطلب؛ لم تُفتح الطباعة');
+            }
+        }
+        const existing = document.getElementById('copy-center-print-root');
+        existing?.remove();
+        const root = document.createElement('div');
+        root.id = 'copy-center-print-root';
+        root.append(source.cloneNode(true));
+        document.body.append(root);
+        const cleanup = () => root.remove();
+        window.addEventListener('afterprint', cleanup, { once: true });
+        try {
+            window.print();
+        }
+        catch (error) {
+            cleanup();
+            throw error;
+        }
+        window.setTimeout(cleanup, 60000);
+    }
+    finally {
+        preparingPrint = false;
+    }
+}
+
+window.testPrint=exports.printLabelElement; if(new URLSearchParams(location.search).get("code")==="0123456789"){document.getElementById("scan-info").style.display="block"}</script></body></html>

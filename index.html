@@ -30,78 +30,13 @@
 .order-label-content [data-order-qr] { flex-shrink: 0; }
 
 @media print {
-  /* Owner-confirmed 40x20mm stock. Keep the single QR at 18mm, including
-   * its quiet zone; compact the adjacent text instead of shrinking the code. */
-  @page {
-    size: 40mm 20mm;
-    margin: 1mm;
-  }
-
-  body > *:not(#copy-center-print-root) {
-    display: none !important;
-  }
-
-  #copy-center-print-root {
-    display: block !important;
-    direction: rtl;
-    width: 38mm;
-    color: #000;
-    background: #fff;
-    font-family: Arial, sans-serif;
-  }
-
-  #copy-center-print-root button,
-  #copy-center-print-root [data-print-control] {
-    display: none !important;
-  }
-
-  /* A code is only as readable as its contrast. A thermal printer has no
-   * greys and a scanner reads reflectance, so force pure black on pure white
-   * and stop the browser economising on the bars. */
-  #copy-center-print-root .label-sheet {
-    width: 38mm;
-    height: 18mm;
-    box-sizing: border-box;
-    margin: 0 !important;
-    break-inside: avoid;
-    page-break-inside: avoid;
-    padding: 0;
-    border: 0;
-    background: #fff !important;
-    color: #000 !important;
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
-  }
-
-  #copy-center-print-root .label-sheet > * {
-    margin: 0 !important;
-  }
-
-  #copy-center-print-root svg {
-    background: #fff !important;
-  }
-
-  /* Never let a print rule rescale the code: its millimetre size is the whole
-   * reason it can be read. Rescaling by CSS is what broke the old label --
-   * `h-14 w-full` silently overrode the width the generator had written,
-   * leaving a 0.175mm bar that no scanner could read. */
-  #copy-center-print-root .label-sheet svg {
-    max-width: none !important;
-    max-height: none !important;
-    min-width: 0 !important;
-  }
-}
-
-
-
-/* Isolated demo print fix: print the visible label for both button and Ctrl+P. */
-@media print {
  @page { size:40mm 20mm; margin:1mm; }
- html,body { margin:0!important; padding:0!important; width:38mm!important; height:18mm!important; overflow:hidden!important; background:white!important; }
- body * { visibility:hidden!important; }
- #label, #label * { visibility:visible!important; }
- #label { display:block!important; position:fixed!important; top:0!important; left:0!important; margin:0!important; padding:0!important; width:38mm!important; height:18mm!important; overflow:hidden!important; break-inside:avoid!important; }
- #copy-center-print-root { display:none!important; }
+ html,body { margin:0!important; padding:0!important; background:white!important; }
+ body > .panel { display:block!important; margin:0!important; padding:0!important; border:0!important; width:38mm!important; max-width:none!important; background:white!important; }
+ .panel > * { display:none!important; }
+ .panel > .preview { display:block!important; margin:0!important; padding:0!important; border:0!important; background:white!important; width:38mm!important; }
+ .preview > #label { display:block!important; width:38mm!important; height:18mm!important; overflow:hidden!important; margin:0!important; padding:0!important; break-inside:avoid!important; }
+ #label svg { max-width:none!important; }
 }
 </style></head><body><div class="panel"><p style="border:1px solid #d1dbe6;background:#f1f5fa;padding:14px;font-weight:bold">نسخة عرض تجريبية مستقلة فقط، وليست نظام الكوبي سنتر الحقيقي. كل البيانات وهمية؛ لا يمكن إنشاء طلب حقيقي أو الدفع.</p><div id="scan-info" style="display:none;border:1px solid #d1dbe6;padding:12px">تم فتح رمز تجريبي: 0123456789. الإجمالي التجريبي: 12.30 ريال. لا يوجد طلب حقيقي.</div><h2>Copy Center — Printer Test / اختبار طباعة الكوبي سنتر</h2>
 <p>هذه تجربة طباعة مستقلة. لا تنشئ أي طلب أو عملية دفع، ولا تغيّر الموقع المنشور.</p>
